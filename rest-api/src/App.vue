@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-md-12">
         <!-- Render Users Table Component  @=action delete user-->
-        <users-table :users='users' @delete-user="deleteUser"/>
+        <users-table :users='users' @delete-user="deleteUser" @update-user="putUser"/>
       </div>
     </div>
   </div>

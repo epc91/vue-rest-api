@@ -15,15 +15,37 @@
                     <th>
                         Email
                     </th>
+                    <th>
+                        Actions
+                    </th>
                 </tr>
             </thead>
             <!-- Table Body -->
             <tbody>
                 <!-- For Loop on Users List -->
                 <tr v-for="user in users" :key="user.id">
-                    <td> {{ user.name }} </td>
-                    <td> {{ user.email }} </td>
-                    <td><button class="btn btn-danger ml-2" @click="$emit('delete-user', user)">🗑️ Delete</button>
+                    <!-- Name -->
+                    <td v-if="editing === user.id">
+                        <input type="text" class="form-control" v-model="user.name">
+                    </td>
+                    <td v-else>
+                        {{ user.name }}
+                    </td>
+                    <!-- Email -->
+                    <td v-if="editing === user.id">
+                        <input type="text" class="form-control" v-model="user.email">
+                    </td>
+                    <td v-else>
+                        {{ user.email }}
+                    </td>
+                    <!-- Buttons -->
+                    <td v-if="editing === user.id">
+                        <button class="btn btn-success" @click="saveUser(user)">💾 Save</button>
+                        <button class="btn btn-secundary ml-2" @click="cancelEdit(user)">❌ Cancel</button>
+                    </td>
+                    <td v-else>
+                        <button class="btn btn-info" @click="editUser(user)">✏️ Edit</button>
+                        <button class="btn btn-danger ml-2" @click="$emit('delete-user', user)">🗑️ Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -37,5 +59,28 @@ export default {
     props: {
         users: Array,
     },
+    data () {
+        return {
+            editing: null,
+        }
+    },
+    methods: {
+        editUser(user) {
+            this.editedUser = Object.assign({}, user);
+            console.log(this.editedUser);
+            this.editing = user.id;
+        },
+        saveUser(user) {
+            if (!user.name.length || !user.email.length) {
+                return;
+            }
+            this.$emit('update-user', user);
+            this.editing = null;
+        },
+        cancelEdit(user) {
+            Object.assign(user, this.editedUser);
+            this.editing = null;
+        }
+    }
 }
 </script>
