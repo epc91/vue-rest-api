@@ -67,7 +67,6 @@ export default {
     methods: {
         editUser(user) {
             this.editedUser = Object.assign({}, user);
-            console.log(this.editedUser);
             this.editing = user.id;
         },
         saveUser(user) {

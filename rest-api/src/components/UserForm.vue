@@ -26,8 +26,8 @@
                         <div class="form-group">
                             <label>Email</label>
                             <input 
-                                v-model="user.mail" 
-                                type="text" 
+                                v-model="user.email" 
+                                type="email" 
                                 class="form-control"
                                 :class="{ 'is-invalid': process && invalidEmail }"
                                 @focus="resetState"
