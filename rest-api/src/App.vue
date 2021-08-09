@@ -9,8 +9,8 @@
     <!-- Row #2 -->
     <div class="row">
       <div class="col-md-12">
-        <!-- Render Users Table Component -->
-        <users-table :users='users'/>
+        <!-- Render Users Table Component  @=action delete user-->
+        <users-table :users='users' @delete-user="deleteUser"/>
       </div>
     </div>
   </div>
@@ -83,7 +83,7 @@ export default {
       try {
         // We get the data using await
         await fetch(`https://jsonplaceholder.typicode.com/usuarios/${user.id}`, {
-          method: 'DELETE'
+          method: 'DELETE',
         });
         // Here we process the data
         this.users = this.users.filter(u => u.id !== user.id);

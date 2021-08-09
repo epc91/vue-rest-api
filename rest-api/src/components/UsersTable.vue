@@ -1,9 +1,12 @@
 <template>
     <div id="users-table">
+        <!-- Conditional Message -->
         <div v-if="!users.length" class="alert alert-info" role="alert">
-            There are't users
+            There aren't users
         </div>
+        <!-- Table -->
         <table class="table">
+            <!-- Table Head -->
             <thead>
                 <tr>
                     <th>
@@ -14,10 +17,14 @@
                     </th>
                 </tr>
             </thead>
+            <!-- Table Body -->
             <tbody>
+                <!-- For Loop on Users List -->
                 <tr v-for="user in users" :key="user.id">
                     <td> {{ user.name }} </td>
                     <td> {{ user.email }} </td>
+                    <td><button class="btn btn-danger ml-2" @click="$emit('delete-user', user)">🗑️ Delete</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
