@@ -9,6 +9,8 @@
     <!-- Row #2 -->
     <div class="row">
       <div class="col-md-12">
+        <!-- Render User Form Component -->
+        <user-form @create-user='postUser'/>
         <!-- Render Users Table Component  @=action delete user-->
         <users-table :users='users' @delete-user="deleteUser" @update-user="putUser"/>
       </div>
@@ -18,6 +20,7 @@
 
 <script>
 import UsersTable from '@/components/UsersTable.vue';
+import UserForm from '@/components/UserForm.vue';
 
 export default {
   name: 'app',
@@ -28,6 +31,7 @@ export default {
   },
   components: {
     UsersTable,
+    UserForm,
   },
   methods: {
     async getUsers() {
